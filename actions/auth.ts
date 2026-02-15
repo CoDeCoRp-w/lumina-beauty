@@ -67,7 +67,10 @@ export async function login(prevState: any, formData: FormData) {
         await createSession(user.id, user.role);
     } catch (error: any) {
         console.error("Login error:", error);
-        return { error: `Error: ${error.message || "Unknown error"}` };
+        // Safely extract the host from the database URL for debugging
+        const dbUrl = process.env.DATABASE_URL || "N/A";
+        const host = dbUrl.includes("@") ? dbUrl.split("@")[1].split("/")[0] : "Invalid URL format";
+        return { error: `Error: ${error.message || "Unknown error"} (DB Host: ${host})` };
     }
 
     redirect("/dashboard");
