@@ -65,9 +65,9 @@ export async function login(prevState: any, formData: FormData) {
         }
 
         await createSession(user.id, user.role);
-    } catch (error) {
+    } catch (error: any) {
         console.error("Login error:", error);
-        return { error: "Algo salió mal." };
+        return { error: `Error: ${error.message || "Unknown error"}` };
     }
 
     redirect("/dashboard");
