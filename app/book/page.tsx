@@ -2,6 +2,9 @@ import { getAvailableServices, getAvailableStaff } from "@/actions/booking";
 import { BookingWizard } from "@/components/booking/booking-wizard";
 
 
+// Force dynamic rendering to ensure we always get the latest service list
+export const dynamic = "force-dynamic";
+
 export default async function BookingPage() {
     const services = await getAvailableServices();
     const staffMembers = await getAvailableStaff();
