@@ -23,8 +23,8 @@ if (!envParsed.success) {
     throw new Error("Invalid environment variables");
 }
 
-// prioritize POSTGRES_PRISMA_URL if available
-const dbUrl = envParsed.data.POSTGRES_PRISMA_URL || envParsed.data.DATABASE_URL;
+// prioritize DATABASE_URL if available (manual override), otherwise use POSTGRES_PRISMA_URL
+const dbUrl = envParsed.data.DATABASE_URL || envParsed.data.POSTGRES_PRISMA_URL;
 
 if (!dbUrl) {
     throw new Error("DATABASE_URL or POSTGRES_PRISMA_URL is required");
